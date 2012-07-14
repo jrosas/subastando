@@ -1,5 +1,6 @@
 # Bootstrap
 app/bootstrap*
+<<<<<<< HEAD
  
 # Symfony directories
 vendor/*
@@ -8,5 +9,15 @@ vendor/*
 web/uploads/*
 web/bundles/*
  
+=======
+
+# Symfony directories
+vendor/*
+*/logs/*
+*/cache/*
+web/uploads/*
+web/bundles/*
+
+>>>>>>> branch 'master' of https://github.com/jrosas/subastando.git
 # Configuration files
 app/config/parameters.ini
