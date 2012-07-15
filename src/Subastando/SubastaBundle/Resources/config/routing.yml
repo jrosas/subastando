@@ -1,0 +1,3 @@
+SubastandoSubastaBundle_homepage:
+    pattern:  /
+    defaults: { _controller: SubastandoSubastaBundle:Default:index }
