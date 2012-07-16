@@ -51,6 +51,20 @@ class Product {
     private $minbid;
 
     /**
+     * @var integer $dayleft
+     *
+     * @ORM\Column(name="dayleft", type="integer")
+     */
+    private $dayleft;
+    
+    /**
+     * @var date $date
+     *
+     * @ORM\Column(name="date", type="datetime")
+     */
+    private $date;
+    
+    /**
      * @var text $description
      *
      * @ORM\Column(name="description", type="text")
@@ -108,7 +122,24 @@ class Product {
     public function setStatus($status) {
         $this->status = $status;
     }
+    
+    public function getDayleft() {
+        return $this->dayleft;
+    }
 
+    public function setDayleft($dayleft) {
+        $this->dayleft = $dayleft;
+    }
+
+    public function getDate() {
+        return $this->date;
+    }
+
+    public function setDate($date) {
+        $this->date = $date;
+    }
+
+    
         /**
      * Set buyout
      *
