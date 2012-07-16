@@ -4,12 +4,13 @@ namespace Subastando\SubastaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Subastando\SubastaBundle\Entity\Picture
  *
- * @ORM\Table()
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
  */
 class Picture {
 
@@ -44,6 +45,7 @@ class Picture {
     private $product;
 
     /**
+     * @var file $file
      * @Assert\File(maxSize="6000000")
      */
     public $file;
@@ -122,7 +124,7 @@ class Picture {
 
             $this->Product = $product;
 
-            $product->getPictues()->add($this);
+            $product->getPictures()->add($this);
         }
     }
 
@@ -133,6 +135,63 @@ class Picture {
      */
     public function getProduct() {
         return $this->product;
+    }
+    
+        public function getAbsolutePath(){
+        return null===$this->path ? null : $this->getUploadRootDir().'/'.$this->path;
+    }
+    
+    public function getWebPath(){
+        return null === $this->path ? null : $this->getUploadDir().'/'.$this->path;
+    }
+    
+    protected function getUploadRootDir(){
+        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+    }
+
+    protected function getUploadDir(){
+        return 'uploads/pictures';
+    }
+    
+    
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate() 
+     */
+    
+    public function preUpload(){
+        if(null!==$this->file){
+            $this->path = uniqid().'.'.$this->file->guessExtension();
+
+            
+        }
+        
+    }
+    
+    
+    
+    /*
+     * @ORM\PostPersist()
+     * @ORM\PostUpdate() 
+     */
+    
+    public function upload(){
+        if(null===$this->file){
+            return;
+        }
+        
+        $this->file->move($this->getUploadRootDir(), $this->path );
+        unset($this->file);
+        
+    }
+    
+    /**
+     * @ORM\PostRemove() 
+     */
+    public function removeUpload(){
+        if($file=  $this->getAbsolutePath()){
+            unlink($file);
+        }
     }
 
 }
