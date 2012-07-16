@@ -1,10 +1,16 @@
-SubastandoSubastaBundle_loadproduct:
+SubastandoSubastaBundle_ProductIndexPage:
+    pattern:  /
+    defaults: { _controller: SubastandoSubastaBundle:Product:index }
+    
+SubastandoSubastaBundle_ProductNewPage:
     pattern:  /products
     defaults: { _controller: SubastandoSubastaBundle:Product:new }
+
 
 SubastandoSubastaBundle_loaduser:
     pattern:  /users
     defaults: { _controller: SubastandoSubastaBundle:User:new }
+
 
 _welcome:
     pattern:  /

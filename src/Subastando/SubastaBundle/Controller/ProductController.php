@@ -13,11 +13,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 class ProductController extends Controller
 {
-
-    /**
-     *
-     * @Template()
-     */
+    public function indexAction()
+    {
+        return $this->render('SubastandoSubastaBundle:Product:index.html.twig');
+    }
     
     public function newAction(Request $request)
     {
