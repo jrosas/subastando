@@ -5,15 +5,14 @@ namespace Subastando\SubastaBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
 /**
  * Subastando\SubastaBundle\Entity\Picture
  *
  * @ORM\Table()
  * @ORM\Entity
  */
-class Picture
-{
+class Picture {
+
     /**
      * @var integer $id
      *
@@ -36,26 +35,25 @@ class Picture
      * @ORM\Column(name="path", type="string", length=255)
      */
     private $path;
-    
+
     /**
      *
      * @ORM\ManytoOne(targetEntity="Product", inversedBy="pictures")
      * @ORM\JoinColumn(name="product_id", referencedColumnName="id")
      */
     private $product;
-    
+
     /**
      * @Assert\File(maxSize="6000000")
      */
     public $file;
 
-        /**
+    /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -64,8 +62,7 @@ class Picture
      *
      * @param string $name
      */
-    public function setName($name)
-    {
+    public function setName($name) {
         $this->name = $name;
     }
 
@@ -74,8 +71,7 @@ class Picture
      *
      * @return string 
      */
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
@@ -84,8 +80,7 @@ class Picture
      *
      * @param string $path
      */
-    public function setPath($path)
-    {
+    public function setPath($path) {
         $this->path = $path;
     }
 
@@ -94,19 +89,17 @@ class Picture
      *
      * @return string 
      */
-    public function getPath()
-    {
+    public function getPath() {
         return $this->path;
     }
-    
+
     /**
      * Set product
      *
      * @param Collection $product
      */
-    public function setProduct($product)
-    {
-        
+    public function setProduct($product) {
+
         if ($product === null) {
 
             if ($this->product !== null) {
@@ -138,8 +131,8 @@ class Picture
      *
      * @return product 
      */
-    public function getProduct()
-    {
+    public function getProduct() {
         return $this->product;
     }
+
 }

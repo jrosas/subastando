@@ -30,6 +30,13 @@ class Product {
     private $name;
 
     /**
+     * @var string $status
+     *
+     * @ORM\Column(name="status", type="string", length=100)
+     */
+    private $status;
+    
+    /**
      * @var integer $buyout
      *
      * @ORM\Column(name="buyout", type="integer")
@@ -94,8 +101,15 @@ class Product {
     public function getName() {
         return $this->name;
     }
+    public function getStatus() {
+        return $this->status;
+    }
 
-    /**
+    public function setStatus($status) {
+        $this->status = $status;
+    }
+
+        /**
      * Set buyout
      *
      * @param integer $buyout
