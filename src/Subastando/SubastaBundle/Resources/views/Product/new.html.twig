@@ -1,0 +1,28 @@
+{% extends 'SubastandoSubastaBundle::layout.html.twig'%}
+{% block body %}
+
+<form action="" method="POST" {{form_enctype(form)}}>
+
+
+    <h2>Products</h2>
+
+    {{form_row(form.name)}}
+    {{form_row(form.description)}}
+    {{form_row(form.buyout)}}
+     {{form_row(form.minbid)}}
+    
+
+    <h3>Pictures</h3>
+    <ul class="pictures">
+
+        {%for picture in form.pictures %}
+            <li>{{ form_row(picture.name)}}</li>
+            <li>{{ form_row(picture.path)}}</li>
+        {%endfor%}
+    </ul>
+
+ 
+    <input type="submit"/>
+</form>
+
+{% endblock %}

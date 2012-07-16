@@ -140,7 +140,12 @@ class Product {
     }
 
     
-        /**
+    public function setCreatedValue(){
+        $this->date = new \DateTime();
+    }
+
+
+    /**
      * Set buyout
      *
      * @param integer $buyout
@@ -208,7 +213,7 @@ class Product {
      *
      * @return Collection
      */
-    public function getPictues() {
+    public function getPictures() {
         return $this->pictures;
     }
 
@@ -253,6 +258,8 @@ class Product {
             $user->getProducts()->add($this);
         }
     }
+    
+
 
     function __construct() {
         $this->bids = new ArrayCollection();

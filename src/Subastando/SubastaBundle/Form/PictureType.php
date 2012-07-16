@@ -11,7 +11,7 @@
  * @author nelly
  */
 
-namespace Acme\Subastando\SubastaBundle\Form;
+namespace Subastando\SubastaBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
 
@@ -19,12 +19,12 @@ class PictureType extends AbstractType {
     
     public function buildForm(FormBuilder $builder, array $options){
         $builder->add('name');
-        $builder->add('path','file');
+        $builder->add('path','text');
     }
     
     public function getDefaultOptions(array $options){
         return array(
-            'data_class'=>'Acme\Subantando\SubastaBundle\Entity\Picture',  
+            'data_class'=>'Subastando\SubastaBundle\Entity\Picture',  
         );
     }
     
