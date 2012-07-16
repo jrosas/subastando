@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Subastando\SubastaBundle\Entity\Bid
  *
- * @ORM\Table()
+ * @ORM\Table(name="bid")
  * @ORM\Entity
  */
 class Bid
@@ -22,18 +22,18 @@ class Bid
     private $id;
 
     /**
-     * @var integer $user_id
      *
-     * @ORM\Column(name="user_id", type="integer")
+     * @ORM\ManytoOne(targetEntity="User", inversedBy="bids")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
-    private $user_id;
+    private $user;
 
     /**
-     * @var integer $product_id
      *
-     * @ORM\Column(name="product_id", type="integer")
+     * @ORM\ManytoOne(targetEntity="Product", inversedBy="bids")
+     * @ORM\JoinColumn(name="product_id", referencedColumnName="id")
      */
-    private $product_id;
+    private $product;
 
     /**
      * @var integer $value
@@ -54,13 +54,37 @@ class Bid
     }
 
     /**
-     * Set user_id
+     * Set user
      *
-     * @param integer $userId
+     * @param collection $user
      */
-    public function setUserId($userId)
+    public function setUser($user)
     {
-        $this->user_id = $userId;
+        
+        if ($user === null) {
+
+            if ($this->user !== null) {
+
+                $this->user->getBids->removeElement($this);
+            }
+
+            $this->user = null;
+        } else {
+
+            if (!$user instanceof User) {
+
+                throw new InvalidArgumentException('$user ....');
+            }
+
+            if ($this->user !== null) {
+
+                $this->user->getBids()->removeElement($this);
+            }
+
+            $this->user = $user;
+
+            $user->getBids()->add($this);
+        }
     }
 
     /**
@@ -68,29 +92,53 @@ class Bid
      *
      * @return integer 
      */
-    public function getUserId()
+    public function getUser()
     {
-        return $this->user_id;
+        return $this->user;
     }
 
     /**
-     * Set product_id
+     * Set product
      *
-     * @param integer $productId
+     * @param Collection $product
      */
-    public function setProductId($productId)
+    public function setProduct($product)
     {
-        $this->product_id = $productId;
+        
+        if ($product === null) {
+
+            if ($this->product !== null) {
+
+                $this->product->getBids()->removeElement($this);
+            }
+
+            $this->product = null;
+        } else {
+
+            if (!$product instanceof Product) {
+
+                throw new InvalidArgumentException('$product ....');
+            }
+
+            if ($this->product !== null) {
+
+                $this->product->getBids->removeElement($this);
+            }
+
+            $this->Product = $product;
+
+            $product->getBids()->add($this);
+        }
     }
 
     /**
-     * Get product_id
+     * Get product
      *
      * @return integer 
      */
-    public function getProductId()
+    public function getProduct()
     {
-        return $this->product_id;
+        return $this->product;
     }
 
     /**
@@ -112,4 +160,7 @@ class Bid
     {
         return $this->value;
     }
+    
+    
+    
 }

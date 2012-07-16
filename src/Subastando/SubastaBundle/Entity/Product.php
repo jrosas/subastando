@@ -3,15 +3,16 @@
 namespace Subastando\SubastaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Subastando\SubastaBundle\Entity\Product
  *
- * @ORM\Table()
+ * @ORM\Table(name="product")
  * @ORM\Entity
  */
-class Product
-{
+class Product {
+
     /**
      * @var integer $id
      *
@@ -24,7 +25,7 @@ class Product
     /**
      * @var string $name
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=100)
      */
     private $name;
 
@@ -49,14 +50,24 @@ class Product
      */
     private $description;
 
+    /**
+     * @ORM\ManytoOne(targetEntity="User", inversedBy="products")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
+
+    /**
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="Bid", mappedBy="product")
+     */
+    private $bids;
 
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -65,8 +76,7 @@ class Product
      *
      * @param string $name
      */
-    public function setName($name)
-    {
+    public function setName($name) {
         $this->name = $name;
     }
 
@@ -75,8 +85,7 @@ class Product
      *
      * @return string 
      */
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
@@ -85,8 +94,7 @@ class Product
      *
      * @param integer $buyout
      */
-    public function setBuyout($buyout)
-    {
+    public function setBuyout($buyout) {
         $this->buyout = $buyout;
     }
 
@@ -95,8 +103,7 @@ class Product
      *
      * @return integer 
      */
-    public function getBuyout()
-    {
+    public function getBuyout() {
         return $this->buyout;
     }
 
@@ -105,8 +112,7 @@ class Product
      *
      * @param integer $minbid
      */
-    public function setMinbid($minbid)
-    {
+    public function setMinbid($minbid) {
         $this->minbid = $minbid;
     }
 
@@ -115,8 +121,7 @@ class Product
      *
      * @return integer 
      */
-    public function getMinbid()
-    {
+    public function getMinbid() {
         return $this->minbid;
     }
 
@@ -125,8 +130,7 @@ class Product
      *
      * @param text $description
      */
-    public function setDescription($description)
-    {
+    public function setDescription($description) {
         $this->description = $description;
     }
 
@@ -135,8 +139,63 @@ class Product
      *
      * @return text 
      */
-    public function getDescription()
-    {
+    public function getDescription() {
         return $this->description;
     }
+
+    /**
+     * Get bids
+     *
+     * @return Collection
+     */
+    public function getBids() {
+        return $this->bids;
+    }
+
+    /**
+     * Get User
+     *
+     * @return Object
+     */
+    public function getUser() {
+        return $this->user;
+    }
+
+    /**
+     * Set User
+     *
+     * @param Collection $user
+     */
+    public function setUser($user) {
+        
+        if ($user === null) {
+
+            if ($this->user !== null) {
+
+                $this->user->getProducts()->removeElement($this);
+            }
+
+            $this->user = null;
+        } else {
+
+            if (!$user instanceof User) {
+
+                throw new InvalidArgumentException('$user ....');
+            }
+
+            if ($this->user !== null) {
+
+                $this->user->getProducts()->removeElement($this);
+            }
+
+            $this->user = $user;
+
+            $user->getProducts()->add($this);
+        }
+    }
+
+    function __construct() {
+        $this->bids = new ArrayCollection();
+    }
+
 }
