@@ -61,7 +61,13 @@ class Product {
      * @ORM\OneToMany(targetEntity="Bid", mappedBy="product")
      */
     private $bids;
-
+    
+    /**
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="Picture", mappedBy="product")
+     */
+    private $pictures;
+    
     /**
      * Get id
      *
@@ -151,6 +157,15 @@ class Product {
     public function getBids() {
         return $this->bids;
     }
+    
+    /**
+     * Get pictures
+     *
+     * @return Collection
+     */
+    public function getPictues() {
+        return $this->pictures;
+    }
 
     /**
      * Get User
@@ -196,6 +211,7 @@ class Product {
 
     function __construct() {
         $this->bids = new ArrayCollection();
+        $this->pictures= new ArrayCollection();
     }
 
 }
