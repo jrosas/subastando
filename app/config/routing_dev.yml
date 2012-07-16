@@ -1,3 +1,7 @@
+SubastandoSubastaBundle_ProductIndexPage:
+    pattern:  /
+    defaults: { _controller: SubastandoSubastaBundle:Product:index }
+    
 _welcome:
     pattern:  /
     defaults: { _controller: AcmeDemoBundle:Welcome:index }

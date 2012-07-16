@@ -49,7 +49,9 @@ li a {
 	font-variant: normal;
 	text-transform: none;
 }
+
 #footer {
+
 	width: 490px;
 	background-image:url(../images/fondoF.png);
 	margin: 0px auto 0px auto;

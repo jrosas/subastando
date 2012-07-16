@@ -11,6 +11,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\PictureController;
 
 class ProductController extends Controller
 {
+    public function indexAction()
+    {
+        return $this->render('SubastandoSubastaBundle:Product:index.html.twig');
+    }
     
     public function newAction()
     {

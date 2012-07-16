@@ -3,7 +3,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>{% block title%} Subastando {% endblock %}</title>
+        {% block css %}
         <link href="{{ asset('/bundles/subastandosubasta/css/style.css') }}" rel="stylesheet" type="text/css" />
+        {% endblock %}
     </head>
     <body>
         <div class="cabecera">
@@ -22,8 +24,7 @@
         </div>
         <div id="body">
             <div class="pag1024">
-                    {% block body %}
-                    
+                    {% block body %}                 
                     {% endblock %}
             </div>
             </div>
