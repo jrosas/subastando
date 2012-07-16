@@ -1,0 +1,19 @@
+{% extends 'SubastandoSubastaBundle::layout.html.twig'%}
+{% block body %}
+
+<form action="" method="POST" {{form_enctype(form)}}>
+
+
+    <h2>User</h2>
+       
+    {{form_row(form.username)}}
+    {{form_row(form.f_name)}}
+    {{form_row(form.l_name)}}
+    {{form_row(form.password)}}
+    {{form_row(form.email)}}
+
+ 
+    <input type="submit"/>
+</form>
+
+{% endblock %}

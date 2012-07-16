@@ -2,6 +2,12 @@ SubastandoSubastaBundle:
     resource: "@SubastandoSubastaBundle/Resources/config/routing.yml"
     prefix:   /
 
+login:
+  pattern: /login
+  defaults: {_controller: SubastandoSubastaBundle:Security:login}
+
+login_check:
+  pattern: /login_check
 # Internal routing configuration to handle ESI
 #_internal:
 #   resource: "@FrameworkBundle/Resources/config/routing/internal.xml"

@@ -48,7 +48,7 @@ class ProductController extends Controller
                 $pic1->setProduct($product);
                 $pic2->setProduct($product);
                 
-                $pic->flush();
+                $em->persist($pic);
                 $em->persist($pic1);
                 $em->persist($pic2);
                 $em->persist($product);       
